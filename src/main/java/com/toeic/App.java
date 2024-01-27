@@ -550,7 +550,8 @@ public class App extends Application {
                         part6Form = new Part6_7Form(stage, root, numberOfRow, excelFileOperationt.getPart6List(),
                                 excelFileOperationt.getLastRowNum(PART6), excelFileOperationt.getHistoryRecordFile(), resultManagement, reviewManagement);
 
-                        // Rebuild the Part6 Form contents
+                        // Rebuild the Part7 Form contents
+                        part6Form.setProperty(property);
                         partSceneList.put(PART6, part6Form.rebuildForm());
                         partLayoutList.put(PART6, part6Form.getLayout());
                         excelFileOperationt.addPartFormLayout(part6Form);

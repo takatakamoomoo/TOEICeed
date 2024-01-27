@@ -34,7 +34,10 @@ public class Part6_7Form extends PartForm{
 
     // 10 minutes for 16 questions -> approx 37.5 seconds per question
     private static final double PART6_TIME = 37500.0;
+
+    private static final double PART6_PER_TIME = 60000.0;
     // 55 minutes for 54 questions -> approx 1 min per question (60 * 1000)
+
     private static final double PART7_TIME = 60000.0;
 
     private static final int PART7_HEIGHT = 780;
@@ -646,14 +649,17 @@ public class Part6_7Form extends PartForm{
     }
 
     private void assignTimeLimit(int row, String timeDefined) {
-        if (part.matches("6"))
-            timerLayout.setTimelimit(PART6_TIME);
-        else { //PART 7
             double timeLimit = (double) Integer.parseInt(property.getProperty(timeDefined));
             if (!parts.get(row).getSource().matches(sourceComboBox.getValue().toString())) {
+            if (part.matches("6"))
+                timerLayout.setTimelimit(PART6_PER_TIME * timeLimit);
+            else
                 timerLayout.setTimelimit(PART7_TIME * timeLimit);
             } else {
-                if (timerLayout.getTimelimit() != timeLimit)
+            if (timerLayout.getTimelimit() != timeLimit) {
+                if (part.matches("6"))
+                    timerLayout.setTimelimit(PART6_PER_TIME * timeLimit);
+                else
                     timerLayout.setTimelimit(PART7_TIME * timeLimit);
             }
         }
@@ -3112,8 +3118,14 @@ public class Part6_7Form extends PartForm{
 
     private void setUpTimeLimit(int row) {
         if (parts.get(row).getFullTime().matches("f1")) {
+            if (part.matches("6"))
+                assignTimeLimit(row, "part6time1");
+            else
             assignTimeLimit(row, "part7time1");
         } else if (parts.get(row).getFullTime().matches("f2")) {
+            if (part.matches("6"))
+                assignTimeLimit(row, "part6time2");
+            else
             assignTimeLimit(row, "part7time2");
         } else if (parts.get(row).getFullTime().matches("h1")) {
             assignTimeLimit(row, "part7half1");
