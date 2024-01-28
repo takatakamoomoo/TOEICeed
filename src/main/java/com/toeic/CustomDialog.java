@@ -124,14 +124,6 @@ class CustomDialog extends Stage {
             event.consume();
         });
 
-        btn2.addEventFilter(MouseEvent.MOUSE_CLICKED, new EventHandler<Event>() {
-            @Override
-            public void handle(Event event) {
-                closeDialog(true);
-                event.consume();
-            }
-        });
-
         root.getChildren().addAll(bg, box, btn, btn2);
 
         setScene(new Scene(root, null));
