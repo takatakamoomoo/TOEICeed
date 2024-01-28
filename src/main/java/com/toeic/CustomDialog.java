@@ -97,20 +97,31 @@ class CustomDialog extends Stage {
         Button btn = new Button("No");
         btn.setTranslateX(bg.getWidth() - 100);
         btn.setTranslateY(bg.getHeight() - 50);
-        btn.setOnAction(e -> closeDialog(false));
 
         Button btn2 = new Button("Yes");
         btn2.setTranslateX(bg.getWidth() - 60);
         btn2.setTranslateY(bg.getHeight() - 50);
-        btn2.setOnAction(e -> closeDialog(true));
 
         // Add mouse click event handlers to the buttons
-        btn.addEventFilter(MouseEvent.MOUSE_CLICKED, new EventHandler<Event>() {
-            @Override
-            public void handle(Event event) {
-                closeDialog(false);
-                event.consume();
-            }
+        btn.setOnMouseClicked(event ->{
+            closeDialog(false);
+            event.consume();
+        });
+
+        btn2.setOnTouchPressed(event ->{
+            closeDialog(true);
+            event.consume();
+        });
+
+        // Add touch pressed event handlers to the buttons
+        btn.setOnTouchPressed(event ->{
+            closeDialog(false);
+            event.consume();
+        });
+
+        btn2.setOnMouseClicked(event ->{
+            closeDialog(true);
+            event.consume();
         });
 
         btn2.addEventFilter(MouseEvent.MOUSE_CLICKED, new EventHandler<Event>() {
