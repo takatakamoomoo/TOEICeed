@@ -16,6 +16,8 @@ import static java.time.LocalTime.now;
 
 public class ExcelFileOperations {
     public static final String OPENING_WORKBOOK = "Opening Worksheet...";
+    public static final String PASS = "pass";
+    public static final String FAIL = "fail";
     private FileInputStream file;
 
     private int totalPos = 0;
@@ -954,12 +956,18 @@ public class ExcelFileOperations {
                 cellResult = row.getCell(resultPos);
                 cellResultDate = row.getCell(resultDatePos);
                 ResultRecord resultRecord = (ResultRecord) itemData.getValue();
+                String result = null;
+
+                if(callAnswered.getStringCellValue().matches(resultRecord.getAnswered()))
+                    result = PASS;
+                else
+                    result = FAIL;
 
                 if (cellResult == null) {
                     Cell cell = row.createCell(resultPos);
-                    cell.setCellValue(resultRecord.getResult());
+                    cell.setCellValue(result);
                 } else {
-                    row.getCell(resultPos).setCellValue(resultRecord.getResult());
+                    row.getCell(resultPos).setCellValue(result);
                 }
 
                 if (cellResultDate == null) {
